@@ -25,10 +25,10 @@ A RESTful API for a blogging platform, built with .NET 9, ASP.NET Core 9, Entity
 *   **Database:**
     *   PostgreSQL
 *   **Libraries & Tools:**
-    *   AutoMapper (for DTO mapping)
-    *   FluentValidation (for request validation)
-    *   Serilog (for structured logging)
-    *   Swashbuckle (for Swagger API documentation)
+    *   AutoMapper
+    *   FluentValidation
+    *   Serilog
+    *   Swashbuckle
 
 ## Getting Started
 
@@ -83,5 +83,3 @@ A RESTful API for a blogging platform, built with .NET 9, ASP.NET Core 9, Entity
     *   `DELETE /api/posts/{id}`: Delete a post.
 *   **Tags:**
     *   `GET /api/tags`: Get all tags.
-
-Thank you for checking out this project!
