@@ -1,6 +1,7 @@
 ﻿using Blog.Application.Interfaces.Persistence;
 using Blog.Domain.Entities;
 using Blog.Infrastructure.Data;
+using Blog.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Infrastructure.Repositories
@@ -14,12 +15,10 @@ namespace Blog.Infrastructure.Repositories
             _context = context;
         }
 
-
         public async Task<Post?> GetByIdAsync(Guid id)
         {
             return await _context.Posts
-                                 .Include(p => p.PostTags)
-                                     .ThenInclude(pt => pt.Tag)
+                                 .IncludeTags()
                                  .FirstOrDefaultAsync(p => p.Id == id);
         }
 
@@ -27,16 +26,14 @@ namespace Blog.Infrastructure.Repositories
         {
             return await _context.Posts
                                  .Where(p => p.IsPublished)
-                                 .Include(p => p.PostTags)
-                                     .ThenInclude(pt => pt.Tag)
+                                 .IncludeTags()
                                  .FirstOrDefaultAsync(p => p.Slug == slug);
         }
 
         public async Task<IEnumerable<Post>> GetAllAsync(int pageNumber, int pageSize)
         {
             return await _context.Posts
-                                 .Include(p => p.PostTags)
-                                     .ThenInclude(pt => pt.Tag)
+                                 .IncludeTags()
                                  .OrderByDescending(p => p.CreatedAt)
                                  .Skip((pageNumber - 1) * pageSize)
                                  .Take(pageSize)
@@ -47,8 +44,7 @@ namespace Blog.Infrastructure.Repositories
         {
             var query = _context.Posts
                 .Where(p => p.IsPublished)
-                .Include(p => p.PostTags)
-                    .ThenInclude(pt => pt.Tag)
+                .IncludeTags()
                 .OrderByDescending(p => p.CreatedAt)
                 .AsQueryable();
 
