@@ -48,7 +48,7 @@ A RESTful API for a blogging platform, built with .NET 9, ASP.NET Core 9, Entity
         **Important:** For local development, use **User Secrets** to store your database password. Do **not** commit sensitive data to `appsettings.json`.
         Navigate to the `src/Blog.Api` directory and run:
         ```bash
-        dotnet user-secrets init # (if not already initialized)
+        dotnet user-secrets init
         dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=localhost;Port=5432;Database=BloggingApp;Username=YOUR_USERNAME;Password=YOUR_PASSWORD"
         ```
         Replace `YOUR_USERNAME` and `YOUR_PASSWORD` with your actual credentials.
