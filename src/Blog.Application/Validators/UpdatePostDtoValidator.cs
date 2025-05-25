@@ -22,7 +22,7 @@ namespace Blog.Application.Validators
                 .NotNull().WithMessage("TagNames list cannot be null.")
                 .Must(tags => tags == null || tags.All(tag => !string.IsNullOrWhiteSpace(tag)))
                     .WithMessage("All tags in TagNames list must be non-empty strings.")
-                .Must(tags => tags == null || tags.Count == tags.Distinct(System.StringComparer.OrdinalIgnoreCase).Count())
+                .Must(tags => tags == null || tags.Count == tags.Distinct(StringComparer.OrdinalIgnoreCase).Count())
                     .WithMessage("Tag names must be unique (case-insensitive).");
         }
     }

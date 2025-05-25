@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Blog.Application.Abstractions;
 using Blog.Application.Contracts.TagDtos;
-using Blog.Application.Interfaces.Persistence;
 
 namespace Blog.Application.Services
 {

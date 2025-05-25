@@ -1,6 +1,6 @@
 ﻿using Blog.Domain.Entities;
 
-namespace Blog.Application.Interfaces.Persistence
+namespace Blog.Application.Abstractions
 {
     public interface IPostRepository
     {

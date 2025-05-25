@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Blog.Application.Abstractions;
 using Blog.Application.Contracts.PostDtos;
 using Blog.Application.Exceptions;
-using Blog.Application.Interfaces.Persistence;
 using Blog.Domain.Entities;
 using System.Text.RegularExpressions;
 

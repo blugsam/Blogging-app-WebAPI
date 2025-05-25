@@ -23,7 +23,7 @@ namespace Blog.Application.Validators
                     .WithMessage("All tags in TagNames list must be non-empty strings.")
                 .Must(tags => tags == null || tags.Count == tags.Distinct(System.StringComparer.OrdinalIgnoreCase).Count()) 
                     .WithMessage("Tag names must be unique (case-insensitive).");
-            // правило на максимальное количество тегов
+            // maximum tags value rule
             // .Must(tags => tags.Count <= 10).WithMessage("A post can have a maximum of 10 tags.");
         }
     }

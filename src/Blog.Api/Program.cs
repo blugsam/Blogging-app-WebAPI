@@ -1,7 +1,7 @@
 using Blog.Api.ErrorHandling;
 using Blog.Api.Extensions;
 using Blog.Api.Filters;
-using Blog.Application.Interfaces.Persistence;
+using Blog.Application.Abstractions;
 using Blog.Application.Services;
 using Blog.Application.Validators;
 using Blog.Infrastructure.Data;

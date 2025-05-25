@@ -1,4 +1,4 @@
-﻿using Blog.Application.Interfaces.Persistence;
+﻿using Blog.Application.Abstractions;
 using Blog.Domain.Entities;
 using Blog.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
