@@ -24,7 +24,6 @@ namespace Blog.Application.Services
         {
             var post = _mapper.Map<Post>(createPostDto);
 
-            // Генерация уникального слага (передаем null, т.к. это новый пост)
             post.Slug = await GenerateUniqueSlugAsync(createPostDto.Title, null);
             post.CreatedAt = DateTime.UtcNow;
             post.UpdatedAt = DateTime.UtcNow;

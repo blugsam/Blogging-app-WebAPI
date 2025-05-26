@@ -17,7 +17,7 @@ namespace Blog.Api.Controllers
             _logger = logger;
         }
 
-        // GET: api/tags
+        //GET: api/tags
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TagDto>>> GetTags()
         {

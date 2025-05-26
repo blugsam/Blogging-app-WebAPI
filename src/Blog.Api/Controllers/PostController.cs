@@ -17,7 +17,7 @@ namespace Blog.Api.Controllers
             _logger = logger;
         }
 
-        // GET: api/posts
+        //GET: api/posts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PostDto>>> GetPosts(
             [FromQuery] int pageNumber = 1,
@@ -28,7 +28,7 @@ namespace Blog.Api.Controllers
             return Ok(posts);
         }
 
-        // GET: api/posts/{slug}
+        //GET: api/posts/{slug}
         [HttpGet("{slug}")]
         public async Task<ActionResult<PostDto>> GetPost(string slug)
         {
@@ -43,7 +43,7 @@ namespace Blog.Api.Controllers
             return Ok(post);
         }
 
-        // POST: api/posts
+        //POST: api/posts
         [HttpPost]
         public async Task<ActionResult<PostDto>> CreatePost([FromBody] CreatePostDto createPostDto)
         {
@@ -60,7 +60,7 @@ namespace Blog.Api.Controllers
             }
         }
 
-        // PUT: api/posts/{id}
+        //PUT: api/posts/{id}
         [HttpPut("{id:guid}")]
         public async Task<ActionResult<PostDto>> UpdatePost(Guid id, [FromBody] UpdatePostDto updatePostDto)
         {
@@ -83,7 +83,7 @@ namespace Blog.Api.Controllers
             }
         }
 
-        // DELETE: api/posts/{id}
+        //DELETE: api/posts/{id}
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeletePost(Guid id)
         {

@@ -1,4 +1,5 @@
 ﻿using Blog.Application.Exceptions;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,8 +8,10 @@ namespace Blog.Api.ErrorHandling
 {
     public class GlobalExceptionHandler(
         ILogger<GlobalExceptionHandler> logger,
-        IProblemDetailsService problemDetailsService) : IExceptionHandler
+        IProblemDetailsService problemDetailsService, 
+        IWebHostEnvironment environment) : IExceptionHandler
     {
+
         public async ValueTask<bool> TryHandleAsync(
             HttpContext httpContext,
             Exception exception,
@@ -28,17 +31,15 @@ namespace Blog.Api.ErrorHandling
             {
                 NotFoundException => (StatusCodes.Status404NotFound, "Resource Not Found", exception.Message),
                 ConflictException => (StatusCodes.Status409Conflict, "Resource Conflict", exception.Message),
+                UnauthorizedAccessException => (StatusCodes.Status401Unauthorized, "Unauthorized", "Access is denied."),
+                ForbiddenException => (StatusCodes.Status403Forbidden, "Forbidden", "You do not have permission to access this resource."),
+                ValidationException ve => (StatusCodes.Status422UnprocessableEntity, "Validation Failed", string.Join("; ", ve.Errors.Select(e => e.ErrorMessage))),
                 BlogApplicationException => (StatusCodes.Status400BadRequest, "Application Rule Violation", exception.Message),
-
-                // TODO: Добавить обработку UnauthorizedAccessException или других специфичных для .NET исключений, если нужно
-
-                // TODO: Добавить обработку исключений аутентификации/авторизации, когда они будут реализованы
-                // InvalidTokenException => (StatusCodes.Status401Unauthorized, "Unauthorized", exception.Message),
-                // TokenExpiredException => (StatusCodes.Status401Unauthorized, "Unauthorized", exception.Message),
-                // UnauthorizedException => (StatusCodes.Status401Unauthorized, "Unauthorized", exception.Message),
-
                 _ => (StatusCodes.Status500InternalServerError, "Internal Server Error", "An unexpected error occurred. Please try again later.")
             };
+
+            if (environment.IsProduction() && statusCode >= 500)
+                detail = "An error occured. Please contact us.";
 
             var problemDetails = new ProblemDetails
             {
@@ -64,8 +65,10 @@ namespace Blog.Api.ErrorHandling
         {
             StatusCodes.Status400BadRequest => "https://tools.ietf.org/html/rfc7231#section-6.5.1",
             StatusCodes.Status401Unauthorized => "https://tools.ietf.org/html/rfc7235#section-3.1",
+            StatusCodes.Status403Forbidden => "https://tools.ietf.org/html/rfc7231#section-6.5.3",
             StatusCodes.Status404NotFound => "https://tools.ietf.org/html/rfc7231#section-6.5.4",
             StatusCodes.Status409Conflict => "https://tools.ietf.org/html/rfc7231#section-6.5.8",
+            StatusCodes.Status422UnprocessableEntity => "https://tools.ietf.org/html/rfc4918#section-11.2",
             StatusCodes.Status500InternalServerError => "https://tools.ietf.org/html/rfc7231#section-6.6.1",
             _ => $"https://httpstatuses.com/{statusCode}"
         };
