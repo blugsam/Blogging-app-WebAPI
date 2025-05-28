@@ -49,7 +49,7 @@ A RESTful API for a blogging platform, built with .NET 9, ASP.NET Core 9, Entity
         Navigate to the `src/Blog.Api` directory and run:
         ```bash
         dotnet user-secrets init
-        dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=localhost;Port=5432;Database=BloggingApp;Username=YOUR_USERNAME;Password=YOUR_PASSWORD"
+        dotnet user-secrets set 'ConnectionStrings:DefaultConnection' 'Host=192.168.0.154;Port=5432;Database=BloggingApp;Username=blugsam;Password=jN^wId_H(gK>s!U8'
         ```
         Replace `YOUR_USERNAME` and `YOUR_PASSWORD` with your actual credentials.
 
