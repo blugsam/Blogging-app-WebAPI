@@ -76,9 +76,9 @@ namespace Blog.Api.Controllers
                 _logger.LogInformation("Post with ID {PostId} updated successfully.", id);
                 return Ok(updatedPost);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                _logger.LogError(ex, "Error updating post with ID {PostId}. DTO: {@UpdatePostDto}", id, updatePostDto);
+                _logger.LogError(exception, "Error updating post with ID {PostId}. DTO: {@UpdatePostDto}", id, updatePostDto);
                 return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred while updating the post.");
             }
         }

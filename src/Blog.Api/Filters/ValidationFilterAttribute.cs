@@ -57,8 +57,8 @@ namespace Blog.Api.Filters
                 var errorsDictionary = validationFailures
                     .GroupBy(e => e.PropertyName)
                     .ToDictionary(
-                        g => ToCamelCase(g.Key),
-                        g => g.Select(e => e.ErrorMessage).ToArray()
+                        grouping => ToCamelCase(grouping.Key),
+                        grouping => grouping.Select(e => e.ErrorMessage).ToArray()
                     );
 
                 _logger.LogWarning("Validation failed for action {ActionName} in controller {ControllerName}. Errors: {@ValidationErrors}",

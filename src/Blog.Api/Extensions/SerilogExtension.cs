@@ -6,8 +6,8 @@ namespace Blog.Api.Extensions
     {
         public static WebApplicationBuilder AddSerilogApi(this WebApplicationBuilder builder)
         {
-            builder.Host.UseSerilog((ctx, lc) => lc
-                .ReadFrom.Configuration(ctx.Configuration)
+            builder.Host.UseSerilog((context, loggerConfiguration) => loggerConfiguration
+                .ReadFrom.Configuration(context.Configuration)
                 .Enrich.FromLogContext()
             );
 
